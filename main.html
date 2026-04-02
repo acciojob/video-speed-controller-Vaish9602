@@ -16,6 +16,33 @@
 
 <script  src="./script.js">
   //Your code goes here
+	const speed = document.querySelector(".speed");
+const bar = document.querySelector(".speed-bar");
+const video = document.querySelector(".flex");
+
+function handleMove(e) {
+    const y = e.offsetY;
+    const height = speed.offsetHeight;
+
+    // percentage position (0 to 1)
+    const percent = y / height;
+
+    // min 0.4x, max 4x speed
+    const min = 0.4;
+    const max = 4;
+
+    const playbackRate = percent * (max - min) + min;
+
+    // update UI
+    bar.style.height = `${percent * 100}%`;
+    bar.textContent = `${playbackRate.toFixed(2)}×`;
+
+    // update video speed
+    video.playbackRate = playbackRate;
+}
+
+// event listener
+speed.addEventListener("mousemove", handleMove);
 </script>
 </body>
 </html>
