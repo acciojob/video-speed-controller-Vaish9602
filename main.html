@@ -2,47 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Video Speed Scrubber</title>
+  <title>Video Speed Controller</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <div class="wrapper">
-    <video class="flex" width="765" height="430" src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" controls></video>
-    <div class="speed">
-      <div class="speed-bar">1×</div>
+  <div class="player">
+
+    <!-- ✅ MUST BE player__video -->
+    <video class="player__video" src="https://www.w3schools.com/html/mov_bbb.mp4"></video>
+
+    <div class="player__controls">
+
+      <!-- Progress Bar -->
+      <div class="progress">
+        <div class="progress__filled"></div>
+      </div>
+
+      <!-- Play/Pause -->
+      <button class="player__button toggle">►</button>
+
+      <!-- Rewind -->
+      <button class="player__button rewind" data-skip="-10">« 10s</button>
+
+      <!-- Forward -->
+      <button class="player__button forward" data-skip="25">25s »</button>
+
+      <!-- Volume -->
+      <input type="range" name="volume" min="0" max="1" step="0.05" value="1">
+
+      <!-- Playback Speed -->
+      <input type="range" name="playbackRate" min="0.5" max="2" step="0.1" value="1">
+
     </div>
   </div>
 
-<script  src="./script.js">
-  //Your code goes here
-	const speed = document.querySelector(".speed");
-const bar = document.querySelector(".speed-bar");
-const video = document.querySelector(".flex");
-
-function handleMove(e) {
-    const y = e.offsetY;
-    const height = speed.offsetHeight;
-
-    // percentage position (0 to 1)
-    const percent = y / height;
-
-    // min 0.4x, max 4x speed
-    const min = 0.4;
-    const max = 4;
-
-    const playbackRate = percent * (max - min) + min;
-
-    // update UI
-    bar.style.height = `${percent * 100}%`;
-    bar.textContent = `${playbackRate.toFixed(2)}×`;
-
-    // update video speed
-    video.playbackRate = playbackRate;
-}
-
-// event listener
-speed.addEventListener("mousemove", handleMove);
-</script>
+  <script src="scripts.js"></script>
 </body>
 </html>
